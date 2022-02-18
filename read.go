@@ -269,12 +269,10 @@ func readNativeFrames(d dicomio.Reader, parsedData *Dataset, fc chan<- *frame.Fr
 	debug.Logf("readNativeFrames:\nRows: %d\nCols:%d\nFrames::%d\nBitsAlloc:%d\nSamplesPerPixel:%d", MustGetInts(rows.Value)[0], MustGetInts(cols.Value)[0], nFrames, bitsAllocated, samplesPerPixel)
 	// Parse the pixels:
 	image.Frames = make([]frame.Frame, nFrames)
-	bo := d.ByteOrder()
+	//bo := d.ByteOrder()
 	bytesAllocated := bitsAllocated / 8
-	pixelBuf := make([]byte, bytesAllocated)
-	for frameIdx := 0; frameIdx < nFrames; frameIdx++ {
-		fmt.Println("===============  FRAMES LOOP =================")
-
+	//pixelBuf := make([]byte, bytesAllocated)
+	/*for frameIdx := 0; frameIdx < nFrames; frameIdx++ {
 		// Init current frame
 		currentFrame := frame.Frame{
 			Encapsulated: false,
@@ -321,7 +319,7 @@ func readNativeFrames(d dicomio.Reader, parsedData *Dataset, fc chan<- *frame.Fr
 		if fc != nil {
 			fc <- &currentFrame // write the current frame to the frame channel
 		}
-	}
+	}*/
 
 	bytesRead = bytesAllocated * samplesPerPixel * pixelsPerFrame * nFrames
 
