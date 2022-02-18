@@ -165,7 +165,7 @@ func readPixelData(r dicomio.Reader, t tag.Tag, vr string, vl uint32, d *Dataset
 	if d == nil {
 		return nil, errors.New("the Dataset context cannot be nil in order to read Native PixelData")
 	}
-
+	fmt.Println("READ NATIVE FRAMESSSSSSSSSSSSSSS")
 	i, _, err := readNativeFrames(r, d, fc)
 
 	if err != nil {
