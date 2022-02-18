@@ -11,12 +11,12 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/rohautl/dicom/pkg/debug"
-	"github.com/rohautl/dicom/pkg/vrraw"
+	"github.com/suyashkumar/dicom/pkg/debug"
+	"github.com/suyashkumar/dicom/pkg/vrraw"
 
-	"github.com/rohautl/dicom/pkg/dicomio"
-	"github.com/rohautl/dicom/pkg/frame"
-	"github.com/rohautl/dicom/pkg/tag"
+	"github.com/suyashkumar/dicom/pkg/dicomio"
+	"github.com/suyashkumar/dicom/pkg/frame"
+	"github.com/suyashkumar/dicom/pkg/tag"
 )
 
 var (
@@ -165,7 +165,6 @@ func readPixelData(r dicomio.Reader, t tag.Tag, vr string, vl uint32, d *Dataset
 	if d == nil {
 		return nil, errors.New("the Dataset context cannot be nil in order to read Native PixelData")
 	}
-	fmt.Println("READ NATIVE FRAMESSSSSSSSSSSSSSS")
 	i, _, err := readNativeFrames(r, d, fc)
 
 	if err != nil {
@@ -224,6 +223,8 @@ func fillBufferSingleBitAllocated(pixelData []int, d dicomio.Reader, bo binary.B
 // that should be available in parsedData (elements like NumberOfFrames, rows, columns, etc)
 func readNativeFrames(d dicomio.Reader, parsedData *Dataset, fc chan<- *frame.Frame) (pixelData *PixelDataInfo,
 	bytesRead int, err error) {
+	fmt.Println("READ NATIVE FRAMES")
+
 	image := PixelDataInfo{
 		IsEncapsulated: false,
 	}
@@ -267,7 +268,6 @@ func readNativeFrames(d dicomio.Reader, parsedData *Dataset, fc chan<- *frame.Fr
 	pixelsPerFrame := MustGetInts(rows.Value)[0] * MustGetInts(cols.Value)[0]
 
 	debug.Logf("readNativeFrames:\nRows: %d\nCols:%d\nFrames::%d\nBitsAlloc:%d\nSamplesPerPixel:%d", MustGetInts(rows.Value)[0], MustGetInts(cols.Value)[0], nFrames, bitsAllocated, samplesPerPixel)
-
 	// Parse the pixels:
 	image.Frames = make([]frame.Frame, nFrames)
 	bo := d.ByteOrder()
@@ -482,7 +482,7 @@ func readFloat(r dicomio.Reader, t tag.Tag, vr string, vl uint32) (Value, error)
 			if err != nil {
 				return nil, err
 			}
-			// TODO(rohautl): revisit this hack to prevent some internal representation issues upconverting from
+			// TODO(suyashkumar): revisit this hack to prevent some internal representation issues upconverting from
 			// float32 to float64. There is no loss of precision, but the value gets some additional significant digits
 			// when using golang casting. This approach prevents those artifacts, but is less efficient.
 			pval, err := strconv.ParseFloat(fmt.Sprint(val), 64)
