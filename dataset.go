@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/suyashkumar/dicom/pkg/tag"
-	"github.com/suyashkumar/dicom/pkg/uid"
+	"github.com/rohautl/dicom/pkg/tag"
+	"github.com/rohautl/dicom/pkg/uid"
 )
 
 // ErrorElementNotFound indicates that the requested element was not found in
@@ -81,7 +81,7 @@ func (d *Dataset) FindElementByTagNested(tag tag.Tag) (*Element, error) {
 //
 // Note that the sequence element itself is sent on the channel in addition to
 // the child elements in the sequence.
-// TODO(suyashkumar): decide if the sequence element itself should be sent or not
+// TODO(rohautl): decide if the sequence element itself should be sent or not
 func (d *Dataset) FlatIterator() <-chan *Element {
 	elemChan := make(chan *Element)
 	go func() {

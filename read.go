@@ -11,12 +11,12 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/suyashkumar/dicom/pkg/debug"
-	"github.com/suyashkumar/dicom/pkg/vrraw"
+	"github.com/rohautl/dicom/pkg/debug"
+	"github.com/rohautl/dicom/pkg/vrraw"
 
-	"github.com/suyashkumar/dicom/pkg/dicomio"
-	"github.com/suyashkumar/dicom/pkg/frame"
-	"github.com/suyashkumar/dicom/pkg/tag"
+	"github.com/rohautl/dicom/pkg/dicomio"
+	"github.com/rohautl/dicom/pkg/frame"
+	"github.com/rohautl/dicom/pkg/tag"
 )
 
 var (
@@ -482,7 +482,7 @@ func readFloat(r dicomio.Reader, t tag.Tag, vr string, vl uint32) (Value, error)
 			if err != nil {
 				return nil, err
 			}
-			// TODO(suyashkumar): revisit this hack to prevent some internal representation issues upconverting from
+			// TODO(rohautl): revisit this hack to prevent some internal representation issues upconverting from
 			// float32 to float64. There is no loss of precision, but the value gets some additional significant digits
 			// when using golang casting. This approach prevents those artifacts, but is less efficient.
 			pval, err := strconv.ParseFloat(fmt.Sprint(val), 64)

@@ -2,7 +2,7 @@ package dcmtime_test
 
 import (
 	"errors"
-	"github.com/suyashkumar/dicom/pkg/dcmtime"
+	"github.com/rohautl/dicom/pkg/dcmtime"
 	"testing"
 	"time"
 )

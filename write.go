@@ -8,12 +8,12 @@ import (
 	"fmt"
 	"io"
 
-	"github.com/suyashkumar/dicom/pkg/vrraw"
+	"github.com/rohautl/dicom/pkg/vrraw"
 
-	"github.com/suyashkumar/dicom/pkg/uid"
+	"github.com/rohautl/dicom/pkg/uid"
 
-	"github.com/suyashkumar/dicom/pkg/dicomio"
-	"github.com/suyashkumar/dicom/pkg/tag"
+	"github.com/rohautl/dicom/pkg/dicomio"
+	"github.com/rohautl/dicom/pkg/tag"
 )
 
 var (
@@ -504,7 +504,7 @@ func writeBytes(w dicomio.Writer, values []byte, vr string) error {
 func writeInts(w dicomio.Writer, values []int, vr string) error {
 	for _, value := range values {
 		switch vr {
-		// TODO(suyashkumar): consider additional validation of VR=AT elements.
+		// TODO(rohautl): consider additional validation of VR=AT elements.
 		case vrraw.UnsignedShort, vrraw.SignedShort, vrraw.AttributeTag:
 			if err := w.WriteUInt16(uint16(value)); err != nil {
 				return err
