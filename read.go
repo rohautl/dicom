@@ -223,7 +223,6 @@ func fillBufferSingleBitAllocated(pixelData []int, d dicomio.Reader, bo binary.B
 // that should be available in parsedData (elements like NumberOfFrames, rows, columns, etc)
 func readNativeFrames(d dicomio.Reader, parsedData *Dataset, fc chan<- *frame.Frame) (pixelData *PixelDataInfo,
 	bytesRead int, err error) {
-	fmt.Println("=============== READ NATIVE FRAMES =================")
 
 	image := PixelDataInfo{
 		IsEncapsulated: false,
@@ -274,6 +273,8 @@ func readNativeFrames(d dicomio.Reader, parsedData *Dataset, fc chan<- *frame.Fr
 	bytesAllocated := bitsAllocated / 8
 	pixelBuf := make([]byte, bytesAllocated)
 	for frameIdx := 0; frameIdx < nFrames; frameIdx++ {
+		fmt.Println("===============  FRAMES LOOP =================")
+
 		// Init current frame
 		currentFrame := frame.Frame{
 			Encapsulated: false,
